@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#define MINIMAL_FENCE_LENGTH 4
+#define MINIMAL_FENCE_LENGTH 3
 
 class Fence {
   public:
