@@ -9,13 +9,16 @@
 #include "../Fence/FenceLengthError.h"
 #include "../DrawMatrix/DrawMatrix.h"
 
+#include "../ANSIEsc/ANSIDefine.h"
+
+/*
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
-  #include "NoANSIEsc.h"
+  #include "../ANSIEsc/NoANSIEsc.h"
 #else
-  #include "ANSIEsc.h"  
+  #include "../ANSIEsc/ANSIEsc.h"  
 #endif
 
-
+*/
 
 
 class InputError{};

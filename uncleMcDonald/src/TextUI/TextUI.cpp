@@ -123,9 +123,14 @@ void TextUI::inputLengthCmd()
     
     try {
     printText("Give length of fence in meters (at least "+std::to_string(lengthMin)+"): \n");
+    printText("Input integer: ");
     std::cin >> length;
     if (length<lengthMin) throw FenceLengthError();
     else if (std::cin.fail()) throw InputError();
+    
+    this->fence->setLengthFence(length);
+    this->fence->init(); 
+    
     }
     
     catch (FenceLengthError& lengthError) {
@@ -134,16 +139,17 @@ void TextUI::inputLengthCmd()
     }
     
     catch(...){
+        std::string errMsg="Input length failed!\n";
+        errMsg+="Type " + ansiEsc::bold + "run" + ansiEsc::reset + " to retry\n\n";
         length=0;
         std::cin.clear();
-        commandLoop();
+        printText(errMsg);
+        //commandLoop();
+        //inputLengthCmd();
     }
+   
     
     
-    
-    this->fence->setLengthFence(length);
-    
-    this->fence->init(); 
 }
 
 void TextUI::displayFenceParametersCmd()
@@ -169,7 +175,9 @@ void TextUI::drawFence()
     this->fencePicture=new FencePicture(fenceMatrix);
     
     fencePicture->setFenceDimensions(sideA, sideB);
-    fencePicture->setASCII();
+    if(WITH_ANSI==1) fencePicture->setANSI();
+    else fencePicture->setASCII();
+    
     fencePicture->drawAll();
     
     printText(fenceMatrix->getPictureString());

@@ -2,7 +2,7 @@
 
 FencePicture::FencePicture(DrawMatrix *picture)
 {
-    std::cout << "Fence Contructor" << std::endl;
+
     this->picture = picture;
     
     
@@ -32,18 +32,41 @@ void FencePicture::drawAll()
     int pictureWidth=picture->getWidth();
     int pictureHeight=picture->getHeight();
     
-    //drawGrass();
+    this->setFenceWidthString();
+    this->setFenceHeightString();
+    
+    
+    drawGrass();
     drawWall();
     drawFence();
+    
+    int lastX=picture->getWidth();
+    int stringLength=this->widthString.length();
     
     picture->moveCursor(3+(this->fenceWidth/2)-1, 2);
     picture->fill(objectID["widthText"]);
     
+    picture->moveCursor(lastX, picture->getCursorYPos());
+    for (int i=0; i<stringLength; i++)
+    {
+        picture->draw(-1, 0, 0);
+    } 
+    
     picture->moveCursor(3+(this->fenceWidth), 3+(this->fenceHeight/2));
     picture->fill(objectID["heightText"]);
     
-    this->setFenceWidthString();
-    this->setFenceHeightString();
+    picture->moveCursor(lastX, picture->getCursorYPos());
+    
+    stringLength=this->heightString.length();
+    
+    for (int i=0; i<stringLength; i++)
+    {
+        picture->draw(-1, 0, 0);
+    } 
+    
+    
+    
+    
     picture->assignSymbol(this->objectID["widthText"], this->getFenceWidthString());
     picture->assignSymbol(this->objectID["heightText"], this->getFenceHeightString());
     
@@ -75,8 +98,7 @@ void FencePicture::drawGrass()
     int height=picture->getHeight();
     for (int y=0; y<height; y++){
        picture->moveCursor(0, y);
-       if (y==2 || y==(height/2)) picture->drawLine(width-3, 0, grassID);
-       else picture->drawLine(width, 0, grassID);
+       picture->drawLine(width, 0, grassID);
    }
 }
 
@@ -105,10 +127,12 @@ void FencePicture::setASCII()
 {
     picture->assignSymbol(objectID["wall"], "X");
     picture->assignSymbol(objectID["fence"], "*");
-    picture->assignSymbol(objectID["grass"], ",");
+    picture->assignSymbol(objectID["grass"], ".");
 }
 
 void FencePicture::setANSI()
 {
-    
+    picture->assignSymbol(objectID["wall"], ansiEsc::redFill+"X"+ansiEsc::reset);
+    picture->assignSymbol(objectID["fence"], ansiEsc::yellowFill+"*"+ansiEsc::reset);
+    picture->assignSymbol(objectID["grass"], ansiEsc::greenFill+"."+ansiEsc::reset);
 }

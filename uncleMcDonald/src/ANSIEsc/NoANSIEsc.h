@@ -1,5 +1,5 @@
-#ifndef ANSIESC_H
-#define ANSIESC_H
+#ifndef NOANSIESC_H
+#define NOANSIESC_H
 #include <iostream>
 #include <string>
 inline namespace ansiEsc {

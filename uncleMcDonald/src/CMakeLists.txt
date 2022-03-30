@@ -5,7 +5,7 @@ set(HEADERS
     Fence/FencePicture.h 
     DrawMatrix/DrawMatrix.h
     TextUI/TextUI.h
-    TextUI/ANSIEsc.h)
+    ANSIEsc/ANSIEsc.h)
     
 set(SOURCES 
     main.cpp 
