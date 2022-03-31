@@ -6,7 +6,7 @@ make
 ./bin/uncleMcDonald
 ```
 
-## About me
+# About me
 I code to improve my skills, realise my ideas and is it very interesting.
 I would be also active in opensource world.
 Coding is not just a professional matter because opensource
